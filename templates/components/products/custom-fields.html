@@ -1,4 +1,9 @@
 {{#each product.custom_fields}}
-<dt class="productView-info-name">{{name}}:</dt>
+{{#if name '==' 'upsell_products'}}
+<dt class="productView-info-name test1">Add ons:</dt>
+<dd class="productView-info-value test1" data-ids="{{value}}"></dd>
+{{else}}
+<dt class="productView-info-name test">{{name}}:</dt>
 <dd class="productView-info-value">{{{value}}}</dd>
+{{/if}}
 {{/each}}

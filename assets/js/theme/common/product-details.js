@@ -12,6 +12,7 @@ import { normalizeFormData } from './utils/api';
 import { isBrowserIE, convertIntoArray } from './utils/ie-helpers';
 import bannerUtils from './utils/banner-utils';
 import currencySelector from '../global/currency-selector';
+// import { upshellProductsSumbit } from '../custom/upshell_products';
 
 export default class ProductDetails extends ProductDetailsBase {
     constructor($scope, context, productAttributesData = {}) {
@@ -83,7 +84,7 @@ export default class ProductDetails extends ProductDetailsBase {
             this.setProductVariant();
         });
 
-        $form.on('submit', event => {
+        $form.on('submit', (event) => {
             this.addToCartValidator.performCheck();
 
             if (this.addToCartValidator.areAll('valid')) {
@@ -401,6 +402,7 @@ export default class ProductDetails extends ProductDetailsBase {
      *
      */
     addProductToCart(event, form) {
+        
         const $addToCartBtn = $('#form-action-addToCart', $(event.target));
         const originalBtnVal = $addToCartBtn.val();
         const waitMessage = $addToCartBtn.data('waitMessage');
@@ -420,6 +422,7 @@ export default class ProductDetails extends ProductDetailsBase {
         this.$overlay.show();
 
         // Add item to cart
+        // upshellProductsSumbit();
         utils.api.cart.itemAdd(normalizeFormData(new FormData(form)), (err, response) => {
             currencySelector(response.data.cart_id);
             const errorMessage = err || response.data.error;
